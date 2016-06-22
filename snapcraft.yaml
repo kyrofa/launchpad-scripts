@@ -1,0 +1,28 @@
+name: cla-check
+version: 0.1
+confinement: strict
+summary: Check if Canonical's Contributor License Agreement has been signed
+description: |
+  Most projects at Canonical require contributors to sign the CLA. That
+  typically means that one must check to see if a contributor has signed the
+  CLA, which is where this snap comes in handy.
+
+  You only need the email address of the contributor; run the snap with the
+  following:
+
+      $ cla-check <email address>
+
+apps:
+  cla-check:
+    command: cla-check
+    plugs: [network, network-bind]
+
+parts:
+  python:
+    plugin: python2
+    python-packages: [launchpadlib, simplejson]
+
+  script:
+    plugin: copy
+    files:
+      src/*: bin/
