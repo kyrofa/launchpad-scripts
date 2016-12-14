@@ -1,6 +1,7 @@
 name: cla-check
-version: 0.1
+version: 0.2
 confinement: strict
+grade: stable
 summary: Check if Canonical's Contributor License Agreement has been signed
 description: |
   Most projects at Canonical require contributors to sign the CLA. That
@@ -12,6 +13,8 @@ description: |
 
       $ cla-check <email address>
 
+  The exit code will be 0 if the CLA has been signed, and non-zero otherwise.
+
 apps:
   cla-check:
     command: cla-check
@@ -19,10 +22,15 @@ apps:
 
 parts:
   python:
-    plugin: python2
+    plugin: python
+    python-version: python2
     python-packages: [launchpadlib, simplejson]
+    build-packages:
+      - gcc
+      - libffi-dev
+      - libssl-dev
 
   script:
-    plugin: copy
-    files:
+    plugin: dump
+    organize:
       src/*: bin/
