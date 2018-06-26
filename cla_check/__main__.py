@@ -1,10 +1,8 @@
-#!/usr/bin/env python
-
 import sys
 from launchpadlib.launchpad import Launchpad
 
 
-def main():
+def run():
 	if len(sys.argv) != 2:
 		sys.exit('Expected a single argument of an email address')
 
@@ -25,7 +23,3 @@ def main():
 		print('The contributor has signed the CLA.')
 	else:
 		sys.exit('The contributor has a Launchpad account, but has not signed the CLA.')
-
-		
-if __name__ == '__main__':
-	main()

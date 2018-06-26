@@ -24,13 +24,7 @@ parts:
   python:
     plugin: python
     python-version: python2
-    python-packages: [launchpadlib, simplejson]
+    requirements: requirements.txt
     build-packages:
-      - gcc
       - libffi-dev
       - libssl-dev
-
-  script:
-    plugin: dump
-    organize:
-      src/*: bin/
