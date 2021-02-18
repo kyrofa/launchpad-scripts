@@ -21,7 +21,7 @@ shortlog_email_rx = re.compile(r"^\s*\d+\s+.*<(\S+)>$", re.M)
 
 
 def get_emails_for_range(commit_range: str):
-    proc = subprocess.run(
+    proc = subprocess.run(  # type: ignore
         ["git", "shortlog", "-se", commit_range], check=True, capture_output=True
     )
 

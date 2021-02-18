@@ -23,18 +23,18 @@ except ImportError:
     sys.exit("missing launchpadlib (sudo apt install python3-launchpadlib)")
 
 
-@functools.lru_cache
+@functools.lru_cache(128)
 def _login():
     print("Logging into launchpad...")
     return Launchpad.login_anonymously("check CLA", "production")
 
 
-@functools.lru_cache
+@functools.lru_cache(128)
 def query_cla_participants():
     print("Querying participants...")
     return _login().people["contributor-agreement-canonical"].participants
 
 
-@functools.lru_cache
+@functools.lru_cache(128)
 def query_person(email: str):
     return _login().people.getByEmail(email=email)
