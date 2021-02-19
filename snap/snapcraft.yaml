@@ -40,3 +40,6 @@ parts:
     requirements: [requirements.txt]
     source: .
     stage-packages: [git]
+
+    # Required for cryptography
+    build-packages: [libssl-dev, libffi-dev]
