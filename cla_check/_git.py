@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
-#
-# Copyright 2021 Canonical Ltd.
+# Copyright 2021 Canonical Ltd
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
@@ -21,10 +19,8 @@ shortlog_email_rx = re.compile(r"^\s*\d+\s+.*<(\S+)>$", re.M)
 
 
 def get_emails_for_range(commit_range: str):
-    proc = subprocess.run(  # type: ignore
-        ["git", "shortlog", "-se", commit_range], check=True, capture_output=True
+    output = subprocess.check_output(["git", "shortlog", "-se", commit_range]).decode(
+        "utf-8"
     )
 
-    return set(
-        m.group(1) for m in shortlog_email_rx.finditer(proc.stdout.decode("utf-8"))
-    )
+    return set(m.group(1) for m in shortlog_email_rx.finditer(output))

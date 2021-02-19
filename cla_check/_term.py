@@ -1,7 +1,6 @@
+# Copyright 2021 Canonical Ltd
 #
-# Copyright 2021 Canonical Ltd.
-#
-# This program is free software: you can REDistribute it and/or modify
+# This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
 # published by the Free Software Foundation.
 #
@@ -18,15 +17,15 @@ import os
 import sys
 
 
-def is_travis() -> bool:
+def _is_travis() -> bool:
     return os.getenv("TRAVIS", "") == "true"
 
 
-def is_github_actions() -> bool:
+def _is_github_actions() -> bool:
     return os.getenv("GITHUB_ACTIONS", "") == "true"
 
 
-if sys.stdout.isatty() or is_travis() or is_github_actions():
+if sys.stdout.isatty() or _is_travis() or _is_github_actions():
     GREEN = "\033[32;1m"
     RED = "\033[31;1m"
     YELLOW = "\033[33;1m"
@@ -39,12 +38,12 @@ else:
     RESET = ""
     CLEAR = ""
 
-if is_travis():
+if _is_travis():
     FOLD_START = "travis_fold:start:{{tag}}\r{}{}{{message}}{}".format(
         CLEAR, YELLOW, RESET
     )
     FOLD_END = "travis_fold:end:{{tag}}\r{}".format(CLEAR)
-elif is_github_actions():
+elif _is_github_actions():
     FOLD_START = "::group::{message}"
     FOLD_END = "::endgroup::"
 else:

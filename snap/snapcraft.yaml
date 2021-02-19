@@ -1,8 +1,5 @@
 name: cla-check
 version: "0.3"
-base: core20
-confinement: strict
-grade: stable
 summary: Check if Canonical's Contributor License Agreement has been signed
 description: |
   Most projects at Canonical require contributors to sign the CLA. That
@@ -17,29 +14,20 @@ description: |
 
   The exit code will be 0 if the CLA has been signed, and non-zero otherwise.
 
+base: core20
+confinement: strict
+grade: stable
+
 apps:
   cla-check:
-    command: bin/python3 $SNAP/bin/cla-check
+    command: bin/cla-check
     plugs: [network, network-bind]
-    environment:
-      PYTHONPATH: $SNAP/usr/lib/python3/dist-packages
 
   cla-check-git:
-    command: bin/python3 $SNAP/bin/cla-check-git
+    command: bin/cla-check-git
     plugs: [network, network-bind]
-    environment:
-      PYTHONPATH: $SNAP/usr/lib/python3/dist-packages
 
 parts:
   cla-check:
-    source: .
     plugin: python
-    stage-packages:
-      - git
-      - python3-launchpadlib
-      - python3-oauthlib
-      - python3-six
-    override-build: |
-      # lsb_release gets pulled in as a dependency, but is breaks python plugin.
-      rm -f /root/parts/cla-check/install/usr/bin/lsb_release
-      snapcraftctl build
+    source: .
