@@ -2,3 +2,5 @@ parts/
 stage/
 prime/
 *.snap
+*.egg-info/
+__pycache__/

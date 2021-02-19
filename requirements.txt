@@ -1,1 +1,1 @@
-launchpadlib
+launchpadlib==1.10.13
