@@ -1,8 +1,6 @@
-#!/usr/bin/env python3
+# Copyright 2021 Canonical Ltd
 #
-# Copyright 2021 Canonical Ltd.
-#
-# This program is free software: you can term.REDistribute it and/or modify
+# This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
 # published by the Free Software Foundation.
 #
@@ -15,15 +13,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
-import sys
 
-from . import cla
+from cla_check import _cla
 
 
-def cla_check_main():
+def main():
     parser = argparse.ArgumentParser(description="")
     parser.add_argument("email_address", help="Email address to verify")
 
     opts = parser.parse_args()
-    if not cla.check_email(email=opts.email_address):
-        sys.exit(1)
+    if _cla.check_email(email=opts.email_address):
+        return 0
+    else:
+        return 1

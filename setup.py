@@ -6,8 +6,8 @@ setup(
     packages=find_packages(),
     entry_points={
         "console_scripts": [
-            "cla-check = cla_check.cla_check:cla_check_main",
-            "cla-check-git = cla_check.cla_check_git:cla_check_git_main",
+            "cla-check = cla_check._commands._cla_check:main",
+            "cla-check-git = cla_check._commands._cla_check_git:main",
         ],
     },
 )
