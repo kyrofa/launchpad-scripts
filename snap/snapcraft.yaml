@@ -42,4 +42,4 @@ parts:
     stage-packages: [git]
 
     # Required for cryptography
-    build-packages: [libssl-dev, libffi-dev]
+    build-packages: [libssl-dev, libffi-dev, cargo]
